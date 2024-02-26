@@ -94,6 +94,13 @@ class UserController extends Controller
         return ResponseFormatter::success($token, 'Token Revoked');
     }
 
+    public function fetch(Request $request)
+    {
+      return ResponseFormatter::success(
+        $request->user(), 'Get Profile Success'
+      );
+    }
+
     public function updateProfile(Request $request)
     {
         $data = $request->all();
@@ -101,6 +108,6 @@ class UserController extends Controller
         $user = Auth::user();
         $user->update($data);
 
-        return ResponseFormatter::success($user, 'Profile Updated');
+        return ResponseFormatter::success($user, 'Profile Update Success');
     }
 }
