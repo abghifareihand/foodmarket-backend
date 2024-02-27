@@ -148,31 +148,5 @@ class UserController extends Controller
         }
     }
 
-    // public function updatePhoto(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'file' => 'required|image|max:2048'
-    //     ]);
 
-    //     if ($validator->fails()) {
-    //         return ResponseFormatter::error([
-    //             'error' => $validator->errors()
-    //         ], 'Update Photo Failed', 401);
-    //     }
-
-    //     if ($request->file('file')) {
-    //         $file = $request->file;
-            // $nameFile = time() . '.' . $file->getClientOriginalExtension();
-
-
-    //         // Simpan foto ke database (url)
-    //         $user = Auth::user();
-    //         $user->profile_photo_path = url('storage/public/user' . $nameFile);
-    //         $user->update();
-
-    //         return ResponseFormatter::success([
-    //             'image_path' => url('storage/public/user' . $nameFile),
-    //         ], 'File Upload Success');
-    //     }
-    // }
 }
