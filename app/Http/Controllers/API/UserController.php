@@ -126,14 +126,53 @@ class UserController extends Controller
         }
 
         if ($request->file('file')) {
-            $file = $request->file->store('assets/user', 'public');
+            $file = $request->file('file');
+
+            // Buat nama file baru dengan menggunakan time() dan ekstensi file asli
+            $nameFile = time() . '.' . $file->getClientOriginalExtension();
+
+            // Simpan file di dalam folder 'user' dalam storage 'public'
+            $file->storeAs('public/user', $nameFile);
+
+            // Tentukan URL lengkap untuk gambar
+            $imagePath = url('storage/user/' . $nameFile);
 
             // Simpan foto ke database (url)
             $user = Auth::user();
-            $user->profile_photo_path = $file;
+            $user->profile_photo_path = $imagePath;
             $user->update();
 
-            return ResponseFormatter::success([$file], 'File Upload Success');
+            return ResponseFormatter::success([
+                'image_path' => $imagePath,
+            ], 'File Upload Success');
         }
     }
+
+    // public function updatePhoto(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'file' => 'required|image|max:2048'
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return ResponseFormatter::error([
+    //             'error' => $validator->errors()
+    //         ], 'Update Photo Failed', 401);
+    //     }
+
+    //     if ($request->file('file')) {
+    //         $file = $request->file;
+            // $nameFile = time() . '.' . $file->getClientOriginalExtension();
+
+
+    //         // Simpan foto ke database (url)
+    //         $user = Auth::user();
+    //         $user->profile_photo_path = url('storage/public/user' . $nameFile);
+    //         $user->update();
+
+    //         return ResponseFormatter::success([
+    //             'image_path' => url('storage/public/user' . $nameFile),
+    //         ], 'File Upload Success');
+    //     }
+    // }
 }
