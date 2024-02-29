@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a href="#">Food</a>
+                <a href="#dashboard/food">Food</a>
             </h2>
         </div>
     </div>
@@ -10,7 +10,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a href="#">Transaction</a>
+                <a href="dashboard/transaction">Transaction</a>
             </h2>
         </div>
     </div>
@@ -18,7 +18,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a href="#">Users</a>
+                <a href="dashboard/users">Users</a>
             </h2>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a href="#">Profile</a>
+                <a href="/user/profile">Profile</a>
             </h2>
         </div>
     </div>
