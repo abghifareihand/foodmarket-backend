@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a href="#dashboard/food">Food</a>
+                <a href="dashboard/food">Food</a>
             </h2>
         </div>
     </div>

@@ -35,19 +35,10 @@ class FoodController extends Controller
     {
         $data = $request->all();
 
-        // Simpan gambar dan dapatkan pathnya
-        $picturePath = $request->file('picturePath')->store('assets/food', 'public');
+        $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
 
-        // Mendapatkan URL gambar
-        $url = url('storage/' . $picturePath);
-
-        // Tambahkan URL gambar ke data
-        $data['picturePath'] = $url;
-
-        // Buat entri baru dalam database
         Food::create($data);
 
-        // Redirect ke halaman index
         return redirect()->route('food.index');
     }
 
@@ -73,26 +64,17 @@ class FoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FoodRequest $request, Food $food)
+    public function update(Request $request, Food $food)
     {
         $data = $request->all();
 
-        // Periksa apakah ada file gambar baru yang diunggah
-        if ($request->hasFile('picturePath')) {
-            // Jika ada, simpan file gambar baru dan dapatkan pathnya
-            $picturePath = $request->file('picturePath')->store('assets/food', 'public');
-
-            // Dapatkan URL gambar baru
-            $url = url('storage/' . $picturePath);
-
-            // Tambahkan URL gambar baru ke data
-            $data['picturePath'] = $url;
+        if($request->file('picturePath'))
+        {
+            $data['picturePath'] = $request->file('picturePath')->store('assets/food', 'public');
         }
 
-        // Update data makanan dengan data yang baru
         $food->update($data);
 
-        // Redirect ke halaman indeks makanan
         return redirect()->route('food.index');
     }
 

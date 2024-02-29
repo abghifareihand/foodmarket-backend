@@ -33,19 +33,10 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        // Simpan foto profil dan dapatkan pathnya
-        $profilePhotoPath = $request->file('profile_photo_path')->store('assets/user', 'public');
+        $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
 
-        // Dapatkan URL foto profil
-        $url = url('storage/' . $profilePhotoPath);
-
-        // Tambahkan URL foto profil ke data
-        $data['profile_photo_path'] = $url;
-
-        // Buat entri baru dalam database
         User::create($data);
 
-        // Redirect ke halaman indeks pengguna
         return redirect()->route('users.index');
     }
 
@@ -71,29 +62,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
         $data = $request->all();
 
-        // Periksa apakah ada file gambar baru yang diunggah
-        if ($request->hasFile('profile_photo_path')) {
-            // Jika ada, simpan file gambar baru dan dapatkan pathnya
-            $profilePhotoPath = $request->file('profile_photo_path')->store('assets/user', 'public');
-
-            // Dapatkan URL foto profil baru
-            $url = url('storage/' . $profilePhotoPath);
-
-            // Tambahkan URL foto profil baru ke data
-            $data['profile_photo_path'] = $url;
+        if ($request->file('picturePath')) {
+            $data['picturePath'] = $request->file('picturePath')->store('assets/user', 'public');
         }
 
-        // Update data pengguna dengan data yang baru
         $user->update($data);
 
-        // Redirect ke halaman indeks pengguna
         return redirect()->route('users.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
