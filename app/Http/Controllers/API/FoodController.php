@@ -67,14 +67,6 @@ class FoodController extends Controller
 
         $result = $food->paginate($limit);
 
-        if ($result->isEmpty()) {
-            return ResponseFormatter::error(
-                [],
-                'Data makanan tidak ditemukan',
-                404
-            );
-        }
-
         return ResponseFormatter::success(
             $result,
             'Data list makanan berhasil di ambil'
