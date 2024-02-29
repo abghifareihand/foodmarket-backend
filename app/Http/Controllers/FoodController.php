@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FoodRequest;
 use App\Models\Food;
 use Illuminate\Http\Request;
 
@@ -24,16 +25,32 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        return view('food.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FoodRequest $request)
     {
-        //
+        $data = $request->all();
+
+        // Simpan gambar dan dapatkan pathnya
+        $picturePath = $request->file('picturePath')->store('assets/food', 'public');
+
+        // Mendapatkan URL gambar
+        $url = url('storage/' . $picturePath);
+
+        // Tambahkan URL gambar ke data
+        $data['picturePath'] = $url;
+
+        // Buat entri baru dalam database
+        Food::create($data);
+
+        // Redirect ke halaman index
+        return redirect()->route('food.index');
     }
+
 
     /**
      * Display the specified resource.

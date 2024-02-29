@@ -18,6 +18,7 @@
                         <tr>
                             <th class="border px-6 py-4">ID</th>
                             <th class="border px-6 py-4">Name</th>
+                            <th class="border px-6 py-4">Ingredients</th>
                             <th class="border px-6 py-4">Price</th>
                             <th class="border px-6 py-4">Rate</th>
                             <th class="border px-6 py-4">Types</th>
@@ -29,6 +30,7 @@
                             <tr>
                                 <td class="border px-6 py-4 text-center">{{ $item->id }}</td>
                                 <td class="border px-6 py-4">{{ $item->name }}</td>
+                                <td class="border px-6 py-4">{{ $item->ingredients }}</td>
                                 <td class="border px-6 py-4">{{ number_format($item->price) }}</td>
                                 <td class="border px-6 py-4">{{ $item->rate }}</td>
                                 <td class="border px-6 py-4">{{ $item->types }}</td>
