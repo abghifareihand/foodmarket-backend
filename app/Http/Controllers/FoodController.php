@@ -65,22 +65,45 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        //
+        return view('food.edit', [
+            'item' => $food
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Food $food)
+    public function update(FoodRequest $request, Food $food)
     {
-        //
+        $data = $request->all();
+
+        // Periksa apakah ada file gambar baru yang diunggah
+        if ($request->hasFile('picturePath')) {
+            // Jika ada, simpan file gambar baru dan dapatkan pathnya
+            $picturePath = $request->file('picturePath')->store('assets/food', 'public');
+
+            // Dapatkan URL gambar baru
+            $url = url('storage/' . $picturePath);
+
+            // Tambahkan URL gambar baru ke data
+            $data['picturePath'] = $url;
+        }
+
+        // Update data makanan dengan data yang baru
+        $food->update($data);
+
+        // Redirect ke halaman indeks makanan
+        return redirect()->route('food.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Food $food)
     {
-        //
+        $food->delete();
+
+        return redirect()->route('food.index');
     }
 }
