@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -22,15 +23,20 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
+
+        User::create($data);
+        return redirect()->route('users.index');
     }
 
     /**
@@ -44,17 +50,27 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', [
+            'item' => $user
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $data = $request->all();
+
+        if ($request->file('profile_photo_path')) {
+            $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/user', 'public');
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.index');
     }
 
     /**
