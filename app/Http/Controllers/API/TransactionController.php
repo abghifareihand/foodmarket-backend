@@ -115,6 +115,9 @@ class TransactionController extends Controller
                 'phone' => $transaction->user->phoneNumber,
                 'address' => $transaction->user->address,
             ],
+            // "enabled_payments" => [
+            //     'bri_va', 'bca_va', 'bni_va',
+            // ],
         ];
 
         // memanggil midtrans

@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div>
+            <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
                 @if ($errors->any())
                     <div class="mb-5" role="alert">
                         <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
@@ -24,8 +24,10 @@
                         </div>
                     </div>
                 @endif
-                <form class="w-full" action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
+                <form class="w-full bg-white text-left text-sm text-gray-500 px-4 py-4"
+                    action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
+
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

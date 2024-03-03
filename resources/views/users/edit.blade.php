@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div>
+            <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
                 @if ($errors->any())
                     <div class="mb-5" role="alert">
                         <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
@@ -24,8 +24,8 @@
                         </div>
                     </div>
                 @endif
-                <form class="w-full" action="{{ route('users.update', $item->id) }}" method="post"
-                    enctype="multipart/form-data">
+                <form class="w-full bg-white text-left text-sm text-gray-500 px-4 py-4"
+                    action="{{ route('users.update', $item->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -59,6 +59,7 @@
                             <input name="profile_photo_path"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name" type="file" placeholder="User Image">
+
                         </div>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -78,7 +79,8 @@
                                 for="grid-last-name">
                                 Password Confirmation
                             </label>
-                            <input value="{{ old('password_confirmation') ?? $item->password }}" name="password_confirmation"
+                            <input value="{{ old('password_confirmation') ?? $item->password }}"
+                                name="password_confirmation"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name" type="password" placeholder="User Password Confirmation">
                         </div>
@@ -137,7 +139,7 @@
                                 for="grid-last-name">
                                 City
                             </label>
-                            <input value="{{ old('city') ?? $item->city  }}" name="city"
+                            <input value="{{ old('city') ?? $item->city }}" name="city"
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-last-name" type="text" placeholder="User City">
                         </div>

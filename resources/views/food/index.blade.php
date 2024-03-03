@@ -9,32 +9,38 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
                 <a href="{{ route('food.create') }}"
-                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">+ Create Food
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Create Food
                 </a>
             </div>
-            <div class="bg-white">
-                <table class="table-auto w-full">
+            <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
+                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                     <thead>
                         <tr>
-                            <th class="border px-6 py-4">ID</th>
-                            <th class="border px-6 py-4">Name</th>
-                            <th class="border px-6 py-4">Ingredients</th>
-                            <th class="border px-6 py-4">Price</th>
-                            <th class="border px-6 py-4">Rate</th>
-                            <th class="border px-6 py-4">Types</th>
-                            <th class="border px-6 py-4">Action</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">ID</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Name</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Ingredients</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Price</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Rate</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-gray-700 border-t border-gray-900">
                         @forelse ($food as $item)
-                            <tr>
-                                <td class="border px-6 py-4 text-center">{{ $item->id }}</td>
-                                <td class="border px-6 py-4">{{ $item->name }}</td>
-                                <td class="border px-6 py-4">{{ $item->ingredients }}</td>
-                                <td class="border px-6 py-4">{{ number_format($item->price) }}</td>
-                                <td class="border px-6 py-4">{{ $item->rate }}</td>
-                                <td class="border px-6 py-4">{{ $item->types }}</td>
-                                <td class="border px-6 py-4 text-center">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 text-center">{{ $item->id }}</td>
+                                <td class="px-6 py-4 font-normal text-gray-900">
+                                    <div class="text-sm">
+                                        <div class="font-medium text-gray-700">{{ $item->name }}</div>
+                                        <div class="text-gray-400">{{ $item->types }}</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    {{ $item->ingredients }}
+                                </td>
+
+                                <td class="px-6 py-4 text-center">IDR {{ number_format($item->price) }}</td>
+                                <td class="px-6 py-4 text-center">{{ number_format($item->rate, 1) }}</td>
+                                <td class="px-6 py-4 text-center">
                                     <a href="{{ route('food.edit', $item->id) }}"
                                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">Edit</a>
                                     <form action="{{ route('food.destroy', $item->id) }}" method="POST"
@@ -47,8 +53,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="border text-center p-5">
-                                    Data Makanan Tidak Ditemukan
+                                <td colspan="5" class="text-center p-5">
+                                    Data User Tidak Ditemukan
                                 </td>
                             </tr>
                         @endforelse
