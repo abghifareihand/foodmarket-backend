@@ -17,6 +17,7 @@
                             <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Quantity</th>
                             <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Total</th>
                             <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Status</th>
+                            <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Date</th>
                             <th scope="col" class="px-6 py-4 font-bold text-gray-900 text-center">Action</th>
                         </tr>
                     </thead>
@@ -41,6 +42,7 @@
                                     {{ $item->status }}
                                 </td>
 
+                                <td class="px-6 py-4 text-center">{{ $item->created_at }}</td>
 
                                 <td class="px-6 py-4 text-center">
                                     <a href="{{ route('transaction.show', $item->id) }}"

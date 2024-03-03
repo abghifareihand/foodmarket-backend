@@ -16,7 +16,7 @@ class TransactionController extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 6);
+        $limit = $request->input('limit', 10);
         $food_id = $request->input('food_id');
         $status = $request->input('status');
 
