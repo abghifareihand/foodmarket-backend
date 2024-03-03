@@ -77,7 +77,6 @@ class TransactionController extends Controller
     {
         $request->validate([
             'food_id' => 'required|exists:food,id',
-            'user_id' => 'required|exists:users,id',
             'quantity' => 'required',
             'total' => 'required',
             'status' => 'required',
@@ -85,7 +84,8 @@ class TransactionController extends Controller
 
         $transaction = Transaction::create([
             'food_id' => $request->food_id,
-            'user_id' => $request->user_id,
+            'user_id' => $request->user()->id,
+            'transaction_number' => 'TRX' . rand(100000, 999999),
             'quantity' => $request->quantity,
             'total' => $request->total,
             'status' => $request->status,
@@ -98,24 +98,23 @@ class TransactionController extends Controller
         Config::$isSanitized = config('services.midtrans.isSanitized');
         Config::$is3ds = config('services.midtrans.is3ds');
 
+
+
         // panggil transaksi yg di buat
         $transaction = Transaction::with(['food', 'user'])->find($transaction->id);
 
         // membuat transaksi midtrans
         $midtrans = [
             'transaction_details' => [
-                'order_id' => $transaction->id,
+                'order_id' => $transaction->transaction_number,
                 'gross_amount' => (int) $transaction->total,
             ],
             'customer_details' => [
                 'first_name' => $transaction->user->name,
                 'email' => $transaction->user->email,
+                'phone' => $transaction->user->phoneNumber,
+                'address' => $transaction->user->address,
             ],
-            // 'enabled_payments' => [
-            //     'gopay',
-            //     'bank_transfer',
-            // ],
-            'vtweb' => [],
         ];
 
         // memanggil midtrans

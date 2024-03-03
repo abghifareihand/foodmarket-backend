@@ -46,7 +46,7 @@ class FoodController extends Controller
         }
 
         if ($types) {
-            $food->where('name', 'like', '%' . $types . '%');
+            $food->where('types', 'like', '%' . $types . '%');
         }
 
         if ($price_from) {

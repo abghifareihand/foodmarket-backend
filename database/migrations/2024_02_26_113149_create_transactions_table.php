@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->integer('user_id');
             $table->integer('food_id');
+            $table->string('transaction_number');
             $table->integer('quantity');
             $table->integer('total');
             $table->string('status');

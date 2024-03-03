@@ -36,6 +36,6 @@ Route::prefix('dashboard')->middleware(['auth:sanctum', 'admin'])->group(functio
 });
 
 // Midtrans Page Success, Unfinish, Error
-Route::get('midtrans/success', [MidtransController::class, 'success']);
-Route::get('midtrans/unfinish', [MidtransController::class, 'unfinish']);
-Route::get('midtrans/error', [MidtransController::class, 'error']);
+// Route::get('midtrans/success', [MidtransController::class, 'success']);
+// Route::get('midtrans/unfinish', [MidtransController::class, 'unfinish']);
+// Route::get('midtrans/error', [MidtransController::class, 'error']);
